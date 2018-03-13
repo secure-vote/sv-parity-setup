@@ -1,0 +1,50 @@
+# This config should be placed in following path:
+#   ~/.local/share/io.parity.ethereum/config.toml
+
+[parity]
+# Auto-updates to every release.
+auto_update = "all"
+# You will be identified as 'securevote-eth-syd-node-01' amongst other nodes..
+identity = "securevote-eth-nv-node-02"
+
+[network]
+# Disable Warp Sync
+warp = false
+
+[rpc]
+# JSON-RPC over HTTP will be accessible on port 38545.
+port = 38545
+#  JSON-RPC will be listening for connections on IP 0.0.0.0.
+interface = "all"
+# Allows Cross-Origin Requests from domain '*'.
+cors = ["*"]
+# Only selected APIs will be exposed over this interface.
+apis = ["web3", "eth", "rpc"]
+hosts = ["all"]
+
+[websockets]
+# UI won't work and WebSockets server will be not available.
+disable = true
+
+[secretstore]
+# You won't be able to encrypt and decrypt secrets.
+disable = true
+
+[ipfs]
+# Secret Store will listen for connections on IP 0.0.0.0.
+interface = "0.0.0.0"
+# Allows Cross-Origin Requests from domain '*'.
+#cors = "*"
+
+[footprint]
+cache_size_db = 6000
+cache_size_blocks = 2000
+cache_size_queue = 2000
+cache_size_state = 2000
+pruning = "fast"
+pruning_history = 1100000
+
+[vm]
+# Enables Just In Time compiler. Super-fast for CPU-intensive contracts.
+#jit = true
+
