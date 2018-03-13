@@ -10,7 +10,7 @@ export LC_ALL=C
 # general ubuntu stuff + packages
 sudo apt update 
 sudo apt upgrade -y
-sudo apt install htop sysstat python3 python3-pip build-essential zsh -y
+sudo DEBIAN_FRONTEND=noninteractive apt -y install htop sysstat python3 python3-pip build-essential zsh
 sudo chsh ubuntu -s /bin/zsh
 
 
