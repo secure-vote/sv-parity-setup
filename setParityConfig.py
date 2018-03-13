@@ -2,9 +2,10 @@
 
 import toml
 import argparse
+import os
 
 parser = argparse.ArgumentParser(description='Setup parity config')
-parser.add_argument('name', type=str, help='set name of node')
+parser.add_argument('--name', type=str, help='set name of node', required=True)
 
 args = parser.parse_args()
 

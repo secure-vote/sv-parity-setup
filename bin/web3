@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+
+var Web3 = require('web3');
+var web3 = new Web3("http://localhost:38545");
+
+require('repl').start({}).context.exports = {web3};
