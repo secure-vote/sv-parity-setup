@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -x 
+set -e
 
 # grab dat dere node name
 NODE_NAME=$1
