@@ -11,12 +11,11 @@ export LC_ALL=C
 sudo apt-get update 
 sudo apt-get -y upgrade
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y install htop sysstat python3 python3-pip build-essential zsh
-sudo chsh ubuntu -s /bin/zsh
 
 
 # node stuff
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
-. ~/.bashrc
+source ~/.bashrc
 nvm install node
 npm install -g web3 nginx-conf
 
@@ -62,11 +61,12 @@ sudo systemctl enable parity
 echo "$NODE_NAME" | sudo tee /etc/hostname
 echo "127.0.1.1 $NODE_NAME" | sudo tee -a /etc/hosts
 
-echo "export PATH=~/bin/:$PATH" | tee -a ~/.zshrc
-echo "export PATH=~/bin/:$PATH" | tee -a ~/.bashrc
+echo 'export PATH=~/bin/:$PATH' | tee -a ~/.zshrc
+echo 'export PATH=~/bin/:$PATH' | tee -a ~/.bashrc
 mkdir -p ~/bin
 cp -a ./bin/* ~/bin/
 
+sudo chsh ubuntu -s /bin/zsh
 
 # finish up by rebooting
 sudo shutdown -r now
