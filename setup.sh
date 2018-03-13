@@ -66,7 +66,7 @@ echo 'export PATH=~/bin/:$PATH' | tee -a ~/.bashrc
 mkdir -p ~/bin
 cp -a ./bin/* ~/bin/
 
-sudo chsh ubuntu -s /bin/zsh
+# sudo chsh ubuntu -s /bin/zsh
 
 # finish up by rebooting
 sudo shutdown -r now
