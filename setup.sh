@@ -8,9 +8,9 @@ NODE_NAME=$1
 export LC_ALL=C
 
 # general ubuntu stuff + packages
-sudo apt update 
-sudo apt upgrade -y
-sudo DEBIAN_FRONTEND=noninteractive apt -y install htop sysstat python3 python3-pip build-essential zsh
+sudo apt-get update 
+sudo apt-get -y upgrade
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y install htop sysstat python3 python3-pip build-essential zsh
 sudo chsh ubuntu -s /bin/zsh
 
 
