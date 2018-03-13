@@ -16,9 +16,9 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get -y install htop sysstat python-minim
 # node stuff
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-nvm install node
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" > /dev/null # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" > /dev/null # This loads nvm bash_completion
+nvm install 8.10.0
 npm install -g web3
 
 
@@ -57,14 +57,16 @@ python3 setParityConfig.py --name "$NODE_NAME"
 # set up service
 sudo cp parity.service /etc/systemd/system/
 sudo systemctl enable parity
+sudo systemctl start parity
 
 
 # set hostname stuff for server
 echo "$NODE_NAME" | sudo tee /etc/hostname
 echo "127.0.1.1 $NODE_NAME" | sudo tee -a /etc/hosts
 
-echo 'export PATH=~/bin/:$PATH' | tee -a ~/.zshrc
+# echo 'export PATH=~/bin/:$PATH' | tee -a ~/.zshrc
 echo 'export PATH=~/bin/:$PATH' | tee -a ~/.bashrc
+echo 'export NODE_PATH=~/.nvm/versions/node/v8.10.0/' | tee -a ~/.bashrc
 mkdir -p ~/bin
 cp -a ./bin/* ~/bin/
 
