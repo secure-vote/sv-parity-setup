@@ -50,7 +50,7 @@ sudo mount -a
 sudo chown -R ubuntu:ubuntu /mnt/eth
 ln -s /mnt/eth ~/.local/share/io.parity.ethereum
 
-python3 setParityConfig.py "$NODE_NAME"
+python3 setParityConfig.py --name "$NODE_NAME"
 
 
 # set up service
