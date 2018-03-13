@@ -10,7 +10,7 @@ export LC_ALL=C
 # general ubuntu stuff + packages
 sudo apt-get update 
 sudo apt-get -y upgrade
-sudo DEBIAN_FRONTEND=noninteractive apt-get -y install htop sysstat python3 python3-pip build-essential zsh
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y install htop sysstat python-minimal python3 python3-pip build-essential zsh
 
 
 # node stuff
@@ -19,7 +19,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 nvm install node
-npm install -g web3 nginx-conf
+npm install -g web3
 
 
 # python requirements + download parity
