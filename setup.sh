@@ -16,7 +16,7 @@ sudo chsh ubuntu -s /bin/zsh
 
 # node stuff
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
-source ~/.bashrc
+. ~/.bashrc
 nvm install node
 npm install -g web3 nginx-conf
 
