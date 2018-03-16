@@ -54,12 +54,6 @@ ln -s /mnt/eth ~/.local/share/io.parity.ethereum
 python3 setParityConfig.py --name "$NODE_NAME"
 
 
-# set up service
-sudo cp parity.service /etc/systemd/system/
-sudo systemctl enable parity
-sudo systemctl start parity
-
-
 # set hostname stuff for server
 echo "$NODE_NAME" | sudo tee /etc/hostname
 echo "127.0.1.1 $NODE_NAME" | sudo tee -a /etc/hosts
@@ -73,10 +67,8 @@ cp -a ./bin/* ~/bin/
 # sudo chsh ubuntu -s /bin/zsh
 
 sudo cp check_parity_cronjob /etc/cron.d/
-sudo cp healthCheck.service /etc/systemd/system/
-sudo systemctl enable healthCheck
-sudo systemctl start healthCheck
 
+./installServices.sh
 
 # finish up by rebooting
 sudo shutdown -r now
