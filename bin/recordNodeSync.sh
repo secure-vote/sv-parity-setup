@@ -2,8 +2,9 @@
 
 . ~/.nvm/nvm.sh
 
-LOGFILE="~/.logParityProgress"
+LOGFILE="/home/ubuntu/.logParityProgress"
 
+touch $LOGFILE
 echo "------" >> $LOGFILE
 date +%s >> $LOGFILE
 date >> $LOGFILE
