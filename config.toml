@@ -42,7 +42,6 @@ cache_size_blocks = 2000
 cache_size_queue = 2000
 cache_size_state = 2000
 pruning = "fast"
-pruning_history = 1100000
 
 [vm]
 # Enables Just In Time compiler. Super-fast for CPU-intensive contracts.

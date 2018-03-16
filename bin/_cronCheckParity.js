@@ -18,7 +18,7 @@ const parityConfig = process.env.HOME + '/.local/share/io.parity.ethereum/config
 var main = async () => {
   var n = await web3.eth.getBlockNumber();
 
-  if (n < 5000000) {
+  if (n < 4000000) {
     process.exit(1)
   }
   
