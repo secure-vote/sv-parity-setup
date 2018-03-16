@@ -10,7 +10,7 @@ export LC_ALL=C
 # general ubuntu stuff + packages
 sudo apt-get update 
 sudo apt-get -y upgrade
-sudo DEBIAN_FRONTEND=noninteractive apt-get -y install htop sysstat python-minimal python3 python3-pip build-essential zsh
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y install htop sysstat python-minimal python3 python3-pip build-essential zsh git-core
 
 
 # node stuff
@@ -66,6 +66,9 @@ sudo cp check_parity_cronjob /etc/cron.d/
 
 ./installBin.sh
 ./installServices.sh
+
+cd ../
+git clone https://github.com/secure-vote/sv-parity-setup && rm -rf ./sv-parity-setup-master || true
 
 # finish up by rebooting
 sudo shutdown -r now
