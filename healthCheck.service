@@ -5,6 +5,7 @@ After=network.target
 [Service]
 User=ubuntu
 Group=ubuntu
+Type=simple
 ExecStart=/home/ubuntu/bin/healthCheck.sh
 Restart=on-failure
 
