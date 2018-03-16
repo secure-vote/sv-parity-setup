@@ -61,13 +61,10 @@ echo "127.0.1.1 $NODE_NAME" | sudo tee -a /etc/hosts
 # echo 'export PATH=~/bin/:$PATH' | tee -a ~/.zshrc
 echo 'export PATH=~/bin/:$PATH' | tee -a ~/.bashrc
 echo 'export NODE_PATH=~/.nvm/versions/node/v8.10.0/' | tee -a ~/.bashrc
-mkdir -p ~/bin
-cp -a ./bin/* ~/bin/
-
-# sudo chsh ubuntu -s /bin/zsh
 
 sudo cp check_parity_cronjob /etc/cron.d/
 
+./installBin.sh
 ./installServices.sh
 
 # finish up by rebooting
