@@ -73,6 +73,10 @@ cp -a ./bin/* ~/bin/
 # sudo chsh ubuntu -s /bin/zsh
 
 sudo cp check_parity_cronjob /etc/cron.d/
+sudo cp healthCheck.service /etc/systemd/system/
+sudo systemctl enable healthCheck
+sudo systemctl start healthCheck
+
 
 # finish up by rebooting
 sudo shutdown -r now
