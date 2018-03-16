@@ -1,6 +1,4 @@
-#!/usr/bin/env node
-
-var Web3 = require('web3');
-var web3 = new Web3("http://localhost:38545");
-
-require('repl').start({}).context.exports = {web3};
+#!/bin/bash
+echo "The script you are running has basename `basename $0`, dirname `dirname $0`"
+echo "The present working directory is `pwd`"
+node -i -e "$(< `dirname $0`/_loadWeb3.js)"
