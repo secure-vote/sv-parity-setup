@@ -19,7 +19,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" > /dev/null # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" > /dev/null # This loads nvm bash_completion
 nvm install 8.10.0
-npm install -g web3@1.0.0-beta.31
+npm install -g web3@1.0.0-beta.31 toml-js
 
 
 # python requirements + download parity
@@ -71,6 +71,8 @@ mkdir -p ~/bin
 cp -a ./bin/* ~/bin/
 
 # sudo chsh ubuntu -s /bin/zsh
+
+sudo cp check_parity_cronjob /etc/cron.d/
 
 # finish up by rebooting
 sudo shutdown -r now

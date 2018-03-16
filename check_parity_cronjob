@@ -1,0 +1,1 @@
+* * * * * sudo -i -u ubuntu /home/ubuntu/bin/checkParityFromCron.sh
