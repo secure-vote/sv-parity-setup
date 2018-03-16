@@ -1,0 +1,1 @@
+*/5 * * * * ubuntu /home/ubuntu/bin/recordNodeSync.sh

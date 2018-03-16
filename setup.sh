@@ -65,6 +65,7 @@ echo 'export NODE_PATH=~/.nvm/versions/node/v8.10.0/' | tee -a ~/.bashrc
 # don't add cronjob, turns out might be useless
 # sudo cp check_parity_cronjob /etc/cron.d/
 
+./installCron.sh
 ./installBin.sh
 ./installServices.sh
 
