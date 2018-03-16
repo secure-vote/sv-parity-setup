@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. ~/.nvm/nvm.sh
+
 NODE_PATH=`npm root -g` node ~/bin/_cronCheckParity.js && sudo systemctl restart parity
 
 echo $? > ~/.lastParityCheck
