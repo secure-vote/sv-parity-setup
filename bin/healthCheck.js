@@ -8,7 +8,7 @@ const reqHandler = (request, response) => {
   web3.eth.isSyncing()
     .then(syncStatus => {
       const code = syncStatus === false ? 200 : 503;
-      const body = syncStatus === false ? 'up to date' : syncStatus.currentBlock;
+      const body = syncStatus === false ? 'up to date' : syncStatus.currentBlock.toString();
       response.statusCode = code;
       console.log(`Replying w status ${code} and body ${body}`);
       response.end(body);  
