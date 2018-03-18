@@ -5,12 +5,13 @@ const http = require('http')
 const port = 33333
 
 const reqHandler = (request, response) => {
-  const p = Promise.all(web3.eth.isSyncing(), web3.eth.getBlockNumber());
+  const p = Promise.all([web3.eth.isSyncing(), web3.eth.getBlockNumber()]);
     p.then(([syncStatus, blockN]) => {
       const code = syncStatus === false ? 200 : 503;
       const body = syncStatus === false ? blockN.toString() : syncStatus.currentBlock.toString();
       response.statusCode = code;
       console.log(`Replying w status ${code} and body ${body}`);
+      console.log(`Got blockN: ${blockN}, and syncStats:`, syncStatus);
       response.end(body);  
     }).catch(err => {
       response.statusCode = 500;
