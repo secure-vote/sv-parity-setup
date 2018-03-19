@@ -7,10 +7,21 @@ NODE_NAME=$1
 # this prevents pip3 complaining
 export LC_ALL=C
 
+
+#tput setaf 1
+#tput bold
+#echo "Warning: You will need to wait for apt to prompt 
+
+
+# hold grub version so we don't get prompted for user input
+sudo apt-mark hold grub
+
+
 # general ubuntu stuff + packages
 sudo apt-get update 
 sudo apt-get -y upgrade
-sudo DEBIAN_FRONTEND=noninteractive apt-get -y install htop sysstat python-minimal python3 python3-pip build-essential zsh git-core
+sudo apt-get -y install htop sysstat python-minimal python3 python3-pip \
+	build-essential zsh git-core fail2ban
 
 
 # node stuff
