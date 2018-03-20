@@ -25,9 +25,14 @@ done
 export LC_ALL=C
 
 
-#tput setaf 1
-#tput bold
-#echo "Warning: You will need to wait for apt to prompt 
+function add_line_to_file {
+	if [ $# -ne 2 ]; then 
+		echo "ERROR; WRONG NUMBER OF ARGS add_line_to_file"
+		false
+	else
+		grep -qF "$1" "$2" || echo "$1" | sudo tee -a "$2"
+	fi
+}
 
 
 # hold grub version so we don't get prompted for user input
@@ -61,21 +66,21 @@ rm -f ~/parity.deb
 
 
 # get some swap up in here
-sudo fallocate -l 2G /swapfile
+sudo fallocate -l 2G /swapfile || true
 sudo chmod 600 /swapfile
-sudo mkswap /swapfile
-sudo swapon /swapfile
-sudo sysctl vm.swappiness=10
-echo 'vm.swappiness=10' | sudo tee -a /etc/sysctl.conf
-echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+sudo mkswap /swapfile || true
+sudo swapon /swapfile || true
+sudo sysctl vm.swappiness=10 || true
 
+add_line_to_file 'vm.swappiness=10' '/etc/sysctl.conf'
+add_line_to_file '/swapfile none swap sw 0 0' '/etc/fstab'
 
 # setup parity directories + nvme
 mkdir -p ~/.local/share
 sudo mkdir -p /mnt/eth
-echo "/dev/nvme0n1 /mnt/eth ext4 defaults,discard 0 0" | sudo tee -a /etc/fstab
-sudo mkfs.ext4 /dev/nvme0n1
-sudo tune2fs -m 2 /dev/nvme0n1
+add_line_to_file "/dev/nvme0n1 /mnt/eth ext4 defaults,discard 0 0" "/etc/fstab"
+sudo mkfs.ext4 /dev/nvme0n1 || true
+sudo tune2fs -m 2 /dev/nvme0n1 || true
 sudo mount -a
 sudo chown -R ubuntu:ubuntu /mnt/eth
 ln -s /mnt/eth ~/.local/share/io.parity.ethereum
@@ -85,11 +90,11 @@ python3 setParityConfig.py --name "$NODE_NAME" --net "$NETWORK"
 
 # set hostname stuff for server
 echo "$NODE_NAME" | sudo tee /etc/hostname
-echo "127.0.1.1 $NODE_NAME" | sudo tee -a /etc/hosts
+add_line_to_file "127.0.1.1 $NODE_NAME" "/etc/hosts"
 
 # echo 'export PATH=~/bin/:$PATH' | tee -a ~/.zshrc
-echo 'export PATH=~/bin/:$PATH' | tee -a ~/.bashrc
-echo 'export NODE_PATH=~/.nvm/versions/node/v8.10.0/' | tee -a ~/.bashrc
+add_line_to_file 'export PATH=~/bin/:$PATH' ~/.bashrc
+add_line_to_file 'export NODE_PATH=~/.nvm/versions/node/v8.10.0/' ~/.bashrc
 
 # don't add cronjob, turns out might be useless
 # sudo cp check_parity_cronjob /etc/cron.d/
