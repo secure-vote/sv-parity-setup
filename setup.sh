@@ -83,7 +83,7 @@ sudo mkfs.ext4 /dev/nvme0n1 || true
 sudo tune2fs -m 2 /dev/nvme0n1 || true
 sudo mount -a
 sudo chown -R ubuntu:ubuntu /mnt/eth
-ln -s /mnt/eth ~/.local/share/io.parity.ethereum
+ln -s /mnt/eth ~/.local/share/io.parity.ethereum || true
 
 python3 setParityConfig.py --name "$NODE_NAME" --net "$NETWORK"
 
