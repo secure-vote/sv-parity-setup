@@ -24,7 +24,7 @@ if __name__ == "__main__":
     print('Set parity identity to %s' % identity)
 
     config['parity']['chain'] = args.net
-    print('Set parity network to $s' % args.net)
+    print('Set parity network to %s' % args.net)
 
     if args.net == "mainnet":
       config['footprint'] = {
