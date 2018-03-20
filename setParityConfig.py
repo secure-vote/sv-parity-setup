@@ -28,10 +28,10 @@ if __name__ == "__main__":
 
     if args.net == "mainnet":
       config['footprint'] = {
-        "cache_size_db": 20000
-        "cache_size_blocks": 6000
-        "cache_size_queue": 6000
-        "cache_size_state": 10000
+        "cache_size_db": 20000,
+        "cache_size_blocks": 6000,
+        "cache_size_queue": 6000,
+        "cache_size_state": 10000,
         "pruning": "archive"
       }
     print("Set parity footprint to: %s" % args.net)

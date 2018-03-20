@@ -36,7 +36,8 @@ sudo apt-mark hold grub
 
 # general ubuntu stuff + packages
 sudo apt-get update 
-sudo apt-get -y upgrade
+## found at https://askubuntu.com/questions/146921/how-do-i-apt-get-y-dist-upgrade-without-a-grub-config-prompt
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade
 sudo apt-get -y install htop sysstat python-minimal python3 python3-pip \
 	build-essential zsh git-core fail2ban
 
