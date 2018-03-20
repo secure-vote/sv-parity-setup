@@ -10,9 +10,9 @@ options=("mainnet" "kovan" "classic" "ropsten")
 select NETWORK in "${options[@]}"
 do
 	case $NETWORK in
-		"mainnet") 
-		"kovan")
-		"classic")
+		"mainnet") ;;
+		"kovan") ;;
+		"classic") ;;
 		"ropsten")
 			echo "Selected: $NETWORK"
 			break
