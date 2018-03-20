@@ -2,7 +2,15 @@
 set -x -e
 
 # grab dat dere node name
-NODE_NAME=$1
+echo "Please enter a name for this node! (e.g. eth-aws-nv-node-05)" && \
+read -p "> " NODE_NAME
+
+echo "Choose network:"
+options=("mainnet" "kovan" "classic" "ropsten")
+select NETWORK in "${options[@]}"
+do 
+done
+
 
 # this prevents pip3 complaining
 export LC_ALL=C
@@ -62,7 +70,7 @@ sudo mount -a
 sudo chown -R ubuntu:ubuntu /mnt/eth
 ln -s /mnt/eth ~/.local/share/io.parity.ethereum
 
-python3 setParityConfig.py --name "$NODE_NAME"
+python3 setParityConfig.py --name "$NODE_NAME" --net "$NETWORK"
 
 
 # set hostname stuff for server

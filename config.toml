@@ -6,6 +6,7 @@
 auto_update = "all"
 # You will be identified as 'securevote-eth-syd-node-01' amongst other nodes..
 identity = "securevote-eth-nv-node-02"
+chain = "mainnet"
 
 [network]
 # Disable Warp Sync
