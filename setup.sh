@@ -8,8 +8,20 @@ read -p "> " NODE_NAME
 echo "Choose network:"
 options=("mainnet" "kovan" "classic" "ropsten")
 select NETWORK in "${options[@]}"
-do 
+do
+	case $NETWORK of 
+		"mainnet") 
+		"kovan")
+		"classic")
+		"ropsten")
+			echo "Selected: $NETWORK"
+			break
+			;;
+		*)
+			echo "Invalid selection...";;
+	esac
 done
+		
 
 
 # this prevents pip3 complaining
