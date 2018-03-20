@@ -9,7 +9,7 @@ echo "Choose network:"
 options=("mainnet" "kovan" "classic" "ropsten")
 select NETWORK in "${options[@]}"
 do
-	case $NETWORK of 
+	case $NETWORK in
 		"mainnet") 
 		"kovan")
 		"classic")
