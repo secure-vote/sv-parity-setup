@@ -28,3 +28,5 @@ Executables in `./bin`
 You should probs just skim the setup.sh script - it's pretty straight forward
 
 Sets up the latest parity release - pulls github release data and parses for the ubuntu deb url - also verifies checksum (but doesn't verify a signature)
+
+The idea is you use an ELB or something in front of the node to add HTTPS and expose on port 8545 or whichever port you want.
