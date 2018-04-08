@@ -25,15 +25,17 @@ if __name__ == "__main__":
 
     config['parity']['chain'] = args.net
     print('Set parity network to %s' % args.net)
-
+    
     if args.net == "mainnet":
       config['footprint'] = {
         "cache_size_db": 20000,
         "cache_size_blocks": 6000,
         "cache_size_queue": 6000,
-        "cache_size_state": 10000,
-        "pruning": "archive"
+        "cache_size_state": 10000
       }
+    
+    config['footprint']['pruning'] = "archive"
+    
     print("Set parity footprint to: %s" % args.net)
 
     config_path = '~/.local/share/io.parity.ethereum/config.toml'
