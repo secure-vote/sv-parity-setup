@@ -18,6 +18,9 @@ echo 'proceeding'
 echo "export ETH_NETWORK=$1" >> ~/.bashrc
 echo "export NODE_NAME=$(cat /etc/hostname)" >> ~/.bashrc
 
+export ETH_NETWORK=$1
+export NODE_NAME=$(cat /etc/hostname)
+
 sed -i 's/"eth", "rpc"/"eth", "net", "rpc"/' ~/.local/share/io.parity.ethereum/config.toml
 
 sudo systemctl restart parity
