@@ -35,7 +35,7 @@ if __name__ == "__main__":
       }
     
     config['footprint']['pruning'] = "archive"
-    
+
     print("Set parity footprint to: %s" % args.net)
 
     config_path = '~/.local/share/io.parity.ethereum/config.toml'

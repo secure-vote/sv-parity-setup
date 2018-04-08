@@ -20,7 +20,7 @@ interface = "all"
 # Allows Cross-Origin Requests from domain '*'.
 cors = ["*"]
 # Only selected APIs will be exposed over this interface.
-apis = ["web3", "eth", "rpc"]
+apis = ["web3", "eth", "rpc", "net"]
 hosts = ["all"]
 
 [websockets]
