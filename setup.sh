@@ -108,7 +108,7 @@ add_line_to_file 'export NODE_PATH=~/.nvm/versions/node/v8.10.0/' ~/.bashrc
 ./installCron.sh
 ./installBin.sh
 ./installServices.sh
-./installStast.sh
+./installStats.sh
 
 cd ../
 git clone https://github.com/secure-vote/sv-parity-setup && rm -rf ./sv-parity-setup-master || true
