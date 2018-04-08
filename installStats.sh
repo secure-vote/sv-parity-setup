@@ -1,7 +1,9 @@
 #!/bin/bash
 
+source ~/.bashrc
+
 npm i -g pm2
-$(pm2 startup | tail -n 1)
+eval "$(pm2 startup | tail -n 1)"
 
 cd ~
 git clone https://github.com/cubedro/eth-net-intelligence-api eth-stats

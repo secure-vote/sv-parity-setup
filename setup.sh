@@ -24,6 +24,9 @@ echo "export ETH_NETWORK=$NETWORK" >> ~/.bashrc
 echo "export NODE_NAME=$NODE_NAME" >> ~/.bashrc
 
 
+export ETH_NETWORK=$NETWORK
+export NODE_NAME=$NODE_NAME
+
 # this prevents pip3 complaining
 export LC_ALL=C
 
