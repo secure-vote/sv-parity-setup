@@ -20,6 +20,9 @@ do
 done
 		
 
+echo "export ETH_NETWORK=$NETWORK" >> ~/.bashrc
+echo "export NODE_NAME=$NODE_NAME" >> ~/.bashrc
+
 
 # this prevents pip3 complaining
 export LC_ALL=C
@@ -102,6 +105,7 @@ add_line_to_file 'export NODE_PATH=~/.nvm/versions/node/v8.10.0/' ~/.bashrc
 ./installCron.sh
 ./installBin.sh
 ./installServices.sh
+./installStast.sh
 
 cd ../
 git clone https://github.com/secure-vote/sv-parity-setup && rm -rf ./sv-parity-setup-master || true
