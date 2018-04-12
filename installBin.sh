@@ -1,4 +1,6 @@
 #!/bin/bash
 
+set -x
+
 mkdir -p ~/bin/
-cp -a ./bin ~/bin
+cp -av ./bin ~/bin

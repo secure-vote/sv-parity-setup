@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 cd ~
 echo "Pulling newest version from git."
 
