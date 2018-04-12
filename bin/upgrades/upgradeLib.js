@@ -4,7 +4,7 @@ module.exports = function(lockFileName, mainF) {
         process.exit(99);
     }
 
-    if (!lockFileName.toString() !== lockFileName || lockFileName === "" || mainF.apply === undefined) {
+    if (lockFileName.toString() !== lockFileName || lockFileName === "" || mainF.apply === undefined) {
         fatalError("Bad initialization of upgrade - needs lockFileName and main function to run");
     }
 
