@@ -24,7 +24,7 @@ for f in `ls`; do
     echo "-------------------"
     echo "Running upgrade: $f"
     echo ""
-    sudo node "./$f"
+    sudo $(whereis node) "./$f"
     echo ""
     echo "Completed $f"
 done
