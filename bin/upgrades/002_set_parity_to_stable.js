@@ -10,6 +10,8 @@ require('./upgradeLib')("002", function(){
     execCmd("sed -i 's/,]/]/' ~/.local/share/io.parity.ethereum/config.toml")
     execCmd("sed -i 's/, ]/]/' ~/.local/share/io.parity.ethereum/config.toml")
 
+    execCmd("ln -s /mnt/eth ~/.parity")
+
     execCmd("systemctl stop parity")
     execCmd("rm -rf ~/.local/share/io.parity.ethereum-updates/");
     execCmd("systemctl start parity")
