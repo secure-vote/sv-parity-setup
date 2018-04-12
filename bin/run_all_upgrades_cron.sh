@@ -1,9 +1,5 @@
 #!/bin/bash
 
-cd ~/sv-parity-setup
-git pull
-./installBin.sh
-
 SLEEP_FOR=$(expr $RANDOM / 10)
 echo "Sleeping for $SLEEP_FOR seconds"
 date
