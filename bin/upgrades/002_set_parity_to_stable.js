@@ -4,6 +4,7 @@ require('./upgradeLib')("002", function(){
 
     const c = toml.parse(fs.readFileSync(parityConfigPath));
     c['parity']['release_track'] = "stable"
+    c['rpc']['hosts'] = ['*']
     fs.writeFileSync(parityConfigPath, toml.dump(c))
     // python toml ends lists like ["item","thing",] -- nodejs toml doesn't like it
     execCmd("sed -i 's/, undefined//' ~/.local/share/io.parity.ethereum/config.toml")
