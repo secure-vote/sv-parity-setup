@@ -1,4 +1,4 @@
 #!/bin/bash
 
 mkdir -p ~/bin/
-cp ./bin/* ~/bin/
+cp -a ./bin ~/bin
