@@ -37,5 +37,5 @@ module.exports = function(lockFileName, mainF) {
     // run it!
     skipIfDone();
     mainF.apply(this, []);
-    touch(lockFileFull);
+    touchFile(lockFileFull);
 }
