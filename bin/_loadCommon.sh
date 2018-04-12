@@ -1,4 +1,6 @@
 #!/bin/bash
 
-source ~/.nvm/nvm.sh
+. ~/.nvm/nvm.sh
+. ~/.profile
+. ~/.bashrc
 export NODE_PATH=`npm root -g`
