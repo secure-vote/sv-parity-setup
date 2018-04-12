@@ -3,7 +3,7 @@
 cd ~
 echo "Pulling newest version from git."
 
-if [ -d ~/sv-parity-setup ]; then
+if [ ! -d ~/sv-parity-setup ]; then
     git clone https://github.com/secure-vote/sv-parity-setup ~/sv-parity-setup
 fi
 
@@ -16,9 +16,10 @@ cd ~/bin/upgrades
 
 . ~/.nvm/nvm.sh
 
-for f in $(ls .); do
+echo "Running all files in $(pwd)"
+for f in `ls`; do
     echo "-------------------"
     echo "Running upgrade: $f"
-    sudo node "./$f"
+    # sudo node "./$f"
     echo "Completed $f"
 done
