@@ -23,6 +23,8 @@ echo "Running all files in $(pwd)"
 for f in `ls`; do
     echo "-------------------"
     echo "Running upgrade: $f"
-    # sudo node "./$f"
+    echo ""
+    sudo node "./$f"
+    echo ""
     echo "Completed $f"
 done
