@@ -17,7 +17,7 @@ cd ~
 cd ~/bin/upgrades
 
 set +x  # no need to echo nvm or beyond here
-. ~/bin/_loadCommon.sh
+source ~/bin/_loadCommon.sh
 
 echo "Running all files in $(pwd)"
 for f in `ls`; do
