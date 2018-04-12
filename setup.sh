@@ -18,7 +18,7 @@ do
 			echo "Invalid selection...";;
 	esac
 done
-		
+
 
 echo "export ETH_NETWORK=$NETWORK" >> ~/.bashrc
 echo "export NODE_NAME=$NODE_NAME" >> ~/.bashrc
@@ -32,7 +32,7 @@ export LC_ALL=C
 
 
 function add_line_to_file {
-	if [ $# -ne 2 ]; then 
+	if [ $# -ne 2 ]; then
 		echo "ERROR; WRONG NUMBER OF ARGS add_line_to_file"
 		false
 	else
@@ -46,7 +46,7 @@ sudo apt-mark hold grub
 
 
 # general ubuntu stuff + packages
-sudo apt-get update 
+sudo apt-get update
 ## found at https://askubuntu.com/questions/146921/how-do-i-apt-get-y-dist-upgrade-without-a-grub-config-prompt
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade
 sudo apt-get -y install htop sysstat python-minimal python3 python3-pip \
@@ -109,9 +109,11 @@ add_line_to_file 'export NODE_PATH=~/.nvm/versions/node/v8.10.0/' ~/.bashrc
 ./installBin.sh
 ./installServices.sh
 ./installStats.sh
+# this script clones repo to ~/sv-parity-setup
+./bin/run_all_upgrades.sh
 
-cd ../
-git clone https://github.com/secure-vote/sv-parity-setup && rm -rf ./sv-parity-setup-master || true
+cd ~
+rm -rf ./sv-parity-setup-master || true
 
 # finish up by rebooting
 sudo shutdown -r now
