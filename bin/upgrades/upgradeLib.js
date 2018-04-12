@@ -45,7 +45,7 @@ module.exports = function(lockFileName, mainF) {
         try {
             return { error: false, cmd, output: child_process.execSync(cmd) }
         } catch (e) {
-            console.warning(`Warning: Cmd ${cmd} errored:`, e);
+            console.warn(`Warning: Cmd ${cmd} errored:`, e);
             return { error: true, cmd, output: e }
         }
     }
