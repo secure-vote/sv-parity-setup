@@ -16,6 +16,7 @@ cd ~
 
 cd ~/bin/upgrades
 
+set +x  # no need to echo nvm or beyond here
 . ~/.nvm/nvm.sh
 
 echo "Running all files in $(pwd)"
