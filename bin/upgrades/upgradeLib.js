@@ -13,7 +13,7 @@ module.exports = function(lockFileName, mainF) {
 
     this.lockDir = path.join(process.env.HOME, ".sv-upgrades")
     if (!fs.existsSync(lockDir))
-        fs.mkdirSync(lockDir)
+        fatalError(`Updates directory (${lockDir}) does not exist`);
     this.lockFileFull = path.join(lockDir, lockFileName);
 
     this.touchFile = (filepath) => fs.closeSync(fs.openSync(filepath, 'a'));

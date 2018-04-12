@@ -22,6 +22,8 @@ source ~/bin/_loadCommon.sh
 
 node -v
 
+mkdir -p ~/.sv-upgrades
+
 echo "Running all files in $(pwd)"
 for f in `ls`; do
     echo "-------------------"
