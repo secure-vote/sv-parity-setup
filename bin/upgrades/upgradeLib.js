@@ -11,7 +11,10 @@ module.exports = function(lockFileName, mainF) {
     this.fs = require('fs')
     this.path = require('path')
 
-    this.lockFileFull = path.join(process.env.HOME, ".sv-upgrades", lockFileName);
+    this.lockDir = path.join(process.env.HOME, ".sv-upgrades")
+    if (!fs.existsSync(lockDir))
+        fs.mkdirSync(lockDir)
+    this.lockFileFull = path.join(lockDir, lockFileName);
 
     this.touchFile = (filepath) => fs.closeSync(fs.openSync(filepath, 'a'));
 
