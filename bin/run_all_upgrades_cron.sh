@@ -7,4 +7,6 @@ sleep $SLEEP_FOR
 echo "Proceeding with upgrades"
 date
 
-~/bin/run_all_upgrades.sh
+cd ~/sv-parity-setup
+git pull
+./bin/run_all_upgrades.sh
