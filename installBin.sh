@@ -3,4 +3,4 @@
 set -x
 
 mkdir -p ~/bin/
-cp -av ./bin ~/bin
+cp -av ./bin ~/bin/
