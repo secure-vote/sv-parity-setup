@@ -50,6 +50,10 @@ module.exports = function(lockFileName, mainF) {
         }
     }
 
+    this.installPackage = pkg => {
+        return execCmd(`DEBIAN_FRONTEND=noninteractive apt-get install -y ${pkg}`)
+    }
+
     // run it!
     skipIfDone();
     mainF.apply(this, []);

@@ -1,5 +1,6 @@
 require('./upgradeLib')("001", function(){
 
-    execCmd("apt-get install -y postfix");
+    execCmd("apt-get update")
+    installPackage("postfix")
 
 });
