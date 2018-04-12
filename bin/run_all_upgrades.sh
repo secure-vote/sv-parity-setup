@@ -22,14 +22,19 @@ source ~/bin/_loadCommon.sh
 
 node -v
 
-mkdir -p ~/.sv-upgrades
+mkdir -p ~/.sv-upgrades/logs
+
+LOGDIR="$HOME/.sv-upgrades/logs"
 
 echo "Running all files in $(pwd)"
-for f in `ls`; do
-    echo "-------------------"
-    echo "Running upgrade: $f"
-    echo ""
-    sudo -E node "./$f"
-    echo ""
-    echo "Completed $f"
+UPGRADEFILES=`ls | grep '\.js' | grep -v upgradeLib`
+echo "Upgrade files to run:"
+echo "$UPGRADEFILES"
+echo ""
+for f in "$UPGRADEFILES"; do
+    echo "------------------- ($(date +%s))" | tee -a "$LOGDIR/$f.log"
+    echo "Running upgrade: $f" | tee -a "$LOGDIR/$f.log"
+    sudo -E node "./$f" | tee -a "$LOGDIR/$f.log"
+    echo "Completed $f" | tee -a "$LOGDIR/$f.log"
 done
+echo "-------------------"
