@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -x
+set -e
 
 cd ~
 echo "Pulling newest version from git."
@@ -18,6 +19,8 @@ cd ~/bin/upgrades
 
 set +x  # no need to echo nvm or beyond here
 source ~/bin/_loadCommon.sh
+
+node -v
 
 echo "Running all files in $(pwd)"
 for f in `ls`; do
