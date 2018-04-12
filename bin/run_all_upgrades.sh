@@ -27,11 +27,8 @@ mkdir -p ~/.sv-upgrades/logs
 LOGDIR="$HOME/.sv-upgrades/logs"
 
 echo "Running all files in $(pwd)"
-UPGRADEFILES=`ls | grep '\.js' | grep -v upgradeLib`
-echo "Upgrade files to run:"
-echo "$UPGRADEFILES"
 echo ""
-for f in "$UPGRADEFILES"; do
+for f in `ls | grep '\.js' | grep -v upgradeLib`; do
     echo "------------------- ($(date +%s))" | tee -a "$LOGDIR/$f.log"
     echo "Running upgrade: $f" | tee -a "$LOGDIR/$f.log"
     sudo -E node "./$f" | tee -a "$LOGDIR/$f.log"
