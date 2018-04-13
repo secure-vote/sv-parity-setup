@@ -23,7 +23,7 @@ module.exports = function(lockFileName, mainF) {
 
     this.skipIfDone = () => {
         if (fs.existsSync(lockFileFull)) {
-            var scriptName = path.basename(__filename);
+            var scriptName = require.main.filename;
             console.log(`Skipping ${scriptName} as lockfile ${lockFileFull} exists`);
             process.exit(0);
         }
