@@ -32,8 +32,8 @@ module.exports = function(lockFileName, mainF) {
     this.appendFile = (filepath, func) => {
         const file = fs.openSync(filepath, 'a');
         const write = msg => {
-            fs.appendFileSync(file, "\n");
             fs.appendFileSync(file, msg);
+            fs.appendFileSync(file, "\n");
         }
         func(write);
         fs.closeSync(file);
