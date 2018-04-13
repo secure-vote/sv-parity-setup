@@ -10,6 +10,7 @@ module.exports = function(lockFileName, mainF) {
 
     this.fs = require('fs')
     this.path = require('path')
+    this.toml = require('toml-js')
 
     this.lockDir = path.join(process.env.HOME, ".sv-upgrades")
     if (!fs.existsSync(lockDir))
@@ -52,6 +53,18 @@ module.exports = function(lockFileName, mainF) {
 
     this.installPackage = pkg => {
         return execCmd(`DEBIAN_FRONTEND=noninteractive apt-get install -y ${pkg}`)
+    }
+
+    this.editParityConfig = f => {
+        execCmd("cp ~/.local/share/io.parity.ethereum/config.toml ~/.parity-config-backup-" + Math.round(Date.now() / 1000).toString())
+
+        const c = toml.parse(fs.readFileSync(parityConfigPath));
+        if (c['parity'] === undefined)
+            fatalError("Parity config seems malformed")
+        // call the function that edits the config file
+        f(c)
+        // commit it back to the config
+        fs.writeFileSync(parityConfigPath, toml.dump(c))
     }
 
     // run it!

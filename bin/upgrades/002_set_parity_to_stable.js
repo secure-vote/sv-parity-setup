@@ -1,7 +1,5 @@
 require('./upgradeLib')("002", function(){
 
-    const toml = require('toml-js');
-
     execCmd("cp ~/.local/share/io.parity.ethereum/config.toml ~/.parity-config-backup-002")
 
     const c = toml.parse(fs.readFileSync(parityConfigPath));
