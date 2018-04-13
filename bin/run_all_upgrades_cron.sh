@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SLEEP_FOR=$(expr $RANDOM / 10)
+SLEEP_FOR=$(expr $RANDOM / 30)
 echo "Sleeping for $SLEEP_FOR seconds"
 date | tee ~/.sv-cron-run-all-upgrades-last
 sleep $SLEEP_FOR
