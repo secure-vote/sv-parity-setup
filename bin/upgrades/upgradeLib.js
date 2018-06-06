@@ -64,7 +64,8 @@ module.exports = function(lockFileName, mainF) {
         // make a proxy where default for section is empty object
         // this only works for the _first_ layer (which is important b/c we have strings and arrays and all kinda things later on)
         let cPx = new Proxy(c, {
-            get: (obj, prop) => prop in obj ? obj[prop] : {}
+            get: (obj, prop) => prop in obj ? obj[prop] : {},
+            set: (obj, prop, value) => obj[prop] = value
         })
         // call the function that edits the config file
         f(cPx)
