@@ -67,6 +67,11 @@ module.exports = function(lockFileName, mainF) {
         fs.writeFileSync(parityConfigPath, toml.dump(c))
     }
 
+    this.restartParity = () => {
+        execCmd("systemctl restart parity")
+        execCmd("/home/ubuntu/bin/restartPm2.sh")
+    }
+
     // run it!
     skipIfDone();
     mainF.apply(this, []);
