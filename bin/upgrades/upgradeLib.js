@@ -61,8 +61,13 @@ module.exports = function(lockFileName, mainF) {
         const c = toml.parse(fs.readFileSync(parityConfigPath));
         if (c['parity'] === undefined)
             fatalError("Parity config seems malformed")
+        // make a proxy where default for section is empty object
+        // this only works for the _first_ layer (which is important b/c we have strings and arrays and all kinda things later on)
+        let cPx = new Proxy(c, {
+            get: (obj, prop) => prop in obj ? obj[prop] : {}
+        })
         // call the function that edits the config file
-        f(c)
+        f(cPx)
         // commit it back to the config
         fs.writeFileSync(parityConfigPath, toml.dump(c))
     }
