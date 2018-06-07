@@ -11,6 +11,7 @@ module.exports = function(lockFileName, mainF) {
     this.fs = require('fs')
     this.path = require('path')
     this.toml = require('toml-js')
+    this.crypto = require('crypto')
 
     this.lockDir = path.join(process.env.HOME, ".sv-upgrades")
     if (!fs.existsSync(lockDir))
@@ -41,12 +42,15 @@ module.exports = function(lockFileName, mainF) {
 
     this.child_process = require('child_process')
 
-    this.execCmd = (cmd) => {
+    this.execCmd = (cmd, mustSucceed) => {
         console.log(`running ${cmd}`)
         try {
             return { error: false, cmd, output: child_process.execSync(cmd) }
         } catch (e) {
             console.warn(`Warning: Cmd ${cmd} errored:`, e);
+            if (mustSucceed === true) {
+                throw Error(`Command ${cmd} gave error: ${e}`)
+            }
             return { error: true, cmd, output: e }
         }
     }
@@ -81,6 +85,30 @@ module.exports = function(lockFileName, mainF) {
     this.restartParity = () => {
         execCmd("systemctl restart parity")
         execCmd("/home/ubuntu/bin/restartPm2.sh")
+    }
+
+    this.randomHex = () => this.crypto.randomBytes(16).toString('hex')
+
+    this.downloadTmpFileAndRunF = (url, f) => {
+        // generate a pseudoRandom filename
+        const randHex = this.randomHex()
+        const filePath = `/home/ubuntu/tmpDownloadFile-${randHex}`
+        // download to that file
+        execCmd(`wget -O ${filePath} ${url}`)
+        // run a function on it
+        f(filePath)
+        // clean up at end
+        execCmd(`rm -rf ${filePath}`)
+    }
+
+    this.assertSha256Checksum = (filePath, checksumHex) => {
+        const hash = crypto.createHash('sha256')
+        const fileBuf = fs.readFileSync(pathName)
+        hash.update(fileBuf)
+        const checksumOut = hash.digest('hex')
+        if (checksumHex !== checksumOut) {
+            throw Error(`Checksum for ${filePath} did not match.\nExpected: ${checksumHex}\nResult:   ${checksumOut}`)
+        }
     }
 
     // run it!
