@@ -103,7 +103,7 @@ module.exports = function(lockFileName, mainF) {
 
     this.assertSha256Checksum = (filePath, checksumHex) => {
         const hash = crypto.createHash('sha256')
-        const fileBuf = fs.readFileSync(pathName)
+        const fileBuf = fs.readFileSync(filePath)
         hash.update(fileBuf)
         const checksumOut = hash.digest('hex')
         if (checksumHex !== checksumOut) {
