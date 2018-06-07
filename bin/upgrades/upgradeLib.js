@@ -109,6 +109,7 @@ module.exports = function(lockFileName, mainF) {
         if (checksumHex !== checksumOut) {
             throw Error(`Checksum for ${filePath} did not match.\nExpected: ${checksumHex}\nResult:   ${checksumOut}`)
         }
+        console.log(`Checksum of ${filePath} matches ${checksumHex}.`)
     }
 
     // run it!

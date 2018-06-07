@@ -35,3 +35,6 @@ for f in `ls | grep '\.js' | grep -v upgradeLib`; do
     echo "Completed $f" | tee -a "$LOGDIR/$f.log"
 done
 echo "-------------------"
+
+# after upgrade runs
+sudo systemctl restart healthCheck
