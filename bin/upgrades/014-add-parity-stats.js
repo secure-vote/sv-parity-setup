@@ -13,8 +13,8 @@ require('./upgradeLib')("014-add-parity-stats", function(){
         config[0].env.WS_SECRET = 'REPLACE_ME'
     })
 
-    execCmd(`cd /home/ubuntu/eth-stats/ && pm2 start ${newAppFilename}`)
-    execCmd(`pm2 save`)
+    execCmd(`cd /home/ubuntu/eth-stats/ && sudo -u ubuntu pm2 start ${newAppFilename}`)
+    execCmd(`sudo -u ubuntu pm2 save`)
     execCmd(`/home/ubuntu/bin/restartPm2.sh`)
 
 });
