@@ -13,7 +13,7 @@ require('./upgradeLib')("014-add-parity-stats", function(){
         config[0].env.WS_SECRET = 'REPLACE_ME'
     })
 
-    execCmd(`/home/ubuntu/bin/addStatsParityIo.sh`)
+    execCmd(`sudo -u ubuntu /home/ubuntu/bin/addStatsParityIo.sh`)
     execCmd(`/home/ubuntu/bin/restartPm2.sh`)
 
 });
