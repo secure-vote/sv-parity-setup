@@ -1,3 +1,4 @@
+// note: this should have been 013-fix-params-be-stable but was an oversight - should be left like this now
 require('./upgradeLib')("012-fix-params-be-stable", function(){
 
     editParityConfig(c => {

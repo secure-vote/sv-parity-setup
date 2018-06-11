@@ -82,6 +82,12 @@ module.exports = function(lockFileName, mainF) {
         fs.writeFileSync(parityConfigPath, toml.dump(c))
     }
 
+    this.editJsonFile = (path, f) => {
+        const config = JSON.parse(fs.readFileSync(path))
+        f(config)
+        fs.writeFileSync(path, JSON.stringify(config, null, 4))
+    }
+
     this.restartParity = () => {
         execCmd("systemctl restart parity")
         execCmd("/home/ubuntu/bin/restartPm2.sh")
