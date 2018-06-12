@@ -39,5 +39,6 @@ config[0].env.WS_SECRET = secret
 if (config[0].env.WS_SERVER == "wss://stats-undefined.parity.io") {
     config[0].env.WS_SERVER = "wss://stats.parity.io"
 }
+config[0].env.INSTANCE_NAME = name
 
 fs.writeFileSync(filename, JSON.stringify(config, null, 4));
