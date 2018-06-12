@@ -23,7 +23,7 @@ require('./upgradeLib')("FILENAME", function(){
         config[0].env.WS_SERVER = `wss://stats${net}.parity.io`
     })
 
-    execCmd(`bash -i -c 'cd eth-stats && pm2 start ${newAppFilename} && pm2 save && exit'`)
+    execCmd(`bash -i -c 'cd /home/ubuntu/eth-stats && pm2 start ${newAppFilename} && pm2 save && exit'`)
 
     fs.copyFileSync(`/home/ubuntu/sv-parity-setup/cron_sv`, '/etc/cron.d/sv')
 });
