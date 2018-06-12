@@ -1,10 +1,8 @@
 module.exports = function(lockFileName, mainF) {
-    var path = require('path');
-    this.path = path;
-    var scriptName = path.basename(__filename);
 
     if (lockFileName === "FILENAME" || lockFileName === "") {
-        lockFileName = scriptName
+        const [, fullpathToMainFile] = process.argv
+        lockFileName = fullpathToMainFile.split('/').pop()
     }
 
     this.fatalError = (msg) => {
@@ -17,6 +15,7 @@ module.exports = function(lockFileName, mainF) {
     }
 
     this.fs = require('fs')
+    this.path = require('path');
     this.toml = require('toml-js')
     this.crypto = require('crypto')
 
