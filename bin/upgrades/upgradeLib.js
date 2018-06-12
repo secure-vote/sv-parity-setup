@@ -1,4 +1,12 @@
 module.exports = function(lockFileName, mainF) {
+    var path = require('path');
+    this.path = path;
+    var scriptName = path.basename(__filename);
+
+    if (lockFileName === "FILENAME" || lockFileName === "") {
+        lockFileName = scriptName
+    }
+
     this.fatalError = (msg) => {
         console.error("FATAL ERROR:", msg);
         process.exit(99);
@@ -9,7 +17,6 @@ module.exports = function(lockFileName, mainF) {
     }
 
     this.fs = require('fs')
-    this.path = require('path')
     this.toml = require('toml-js')
     this.crypto = require('crypto')
 
