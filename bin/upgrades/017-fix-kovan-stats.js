@@ -11,6 +11,6 @@ require('./upgradeLib')("FILENAME", function(){
         }
     })
 
-    execCmd("pm2 delete stats-parity")
-    execCmd(`cd /home/ubuntu/eth-stats/ && pm2 start ${configFilename} && pm2 save`)
+    execCmd("bash -i -c 'pm2 delete stats-parity && exit'")
+    execCmd(`bash -i -c 'cd /home/ubuntu/eth-stats/ && pm2 start ${configFilename} && pm2 save && exit'`)
 });
