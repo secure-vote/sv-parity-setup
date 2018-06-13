@@ -124,6 +124,18 @@ module.exports = function(lockFileName, mainF) {
         console.log(`Checksum of ${filePath} matches ${checksumHex}.`)
     }
 
+    this.log = (...args) => {
+        console.log(...args)
+    }
+
+    this.updateCron = () => {
+        log("copying cron_sv to /etc/cron.d/sv")
+        fs.copyFileSync(`/home/ubuntu/sv-parity-setup/cron_sv`, '/etc/cron.d/sv')
+        log("setting permissions on /etc/cron.d/sv")
+        execCmd(`chmod 644 /etc/cron.d/sv`)
+        log("done updating cron")
+    }
+
     // run it!
     skipIfDone();
     mainF.apply(this, []);

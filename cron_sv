@@ -1,4 +1,4 @@
 SHELL=/bin/bash
 0 */12 * * * ubuntu bash -i -c '/home/ubuntu/bin/restartPm2.sh; exit'
-0 0 * * * ubuntu bash -i -c '/home/ubuntu/bin/run_all_upgrades_cron.sh; exit'
+0 * * * * ubuntu bash -i -c '/home/ubuntu/bin/run_all_upgrades_cron.sh; exit'
 0 1 * * * root /usr/bin/apt-get update
