@@ -1,23 +1,45 @@
 #!/bin/bash
 set -x -e
 
-# grab dat dere node name
-echo "Please enter a name for this node! (e.g. eth-aws-nv-node-05)" && \
-read -p "> " NODE_NAME
+NODE_NAME="$1"
+NETWORK="$2"
 
-echo "Choose network:"
+if [[ -z "$NODE_NAME" ]]; then
+	# grab dat dere node name
+	echo "Please enter a name for this node! (e.g. eth-aws-nv-node-05)" && \
+	read -p "> " NODE_NAME
+else
+	echo "Using '$NODE_NAME' for NODE_NAME"
+fi
+
+
 options=("mainnet" "kovan" "classic" "ropsten")
-select NETWORK in "${options[@]}"
-do
-	case $NETWORK in
-		"mainnet"|"kovan"|"classic"|"ropsten")
-			echo "Selected: $NETWORK"
+
+if [[ -z "$NETWORK" ]]; then
+	echo "Choose network:"
+	select NETWORK in "${options[@]}"
+	do
+		case $NETWORK in
+			"mainnet"|"kovan"|"classic"|"ropsten")
+				echo "Selected: $NETWORK"
+				break
+				;;
+			*)
+				echo "Invalid selection...";;
+		esac
+	done
+else
+	case "$NETWORK" in
+		${options})
+			# all g
 			break
 			;;
 		*)
-			echo "Invalid selection...";;
+			echo "Network named '$NETWORK' is unknown. Exiting..."
+			exit 1
+			;;
 	esac
-done
+fi
 
 
 echo "export ETH_NETWORK=$NETWORK" >> ~/.bashrc
