@@ -8,6 +8,12 @@ cd sv-parity-setup-master && \
 bash setup.sh | tee setup.log
 ```
 
+Note: `setup.sh` optionally takes two arguments:
+
+`bash setup.sh "<node-name>" "<network>"`
+
+If these are supplied zero user interaction should be necessary.
+
 ## Notes
 
 **This is specific to i3 nodes - look in for disk setup / partitioning / swap / etc**
