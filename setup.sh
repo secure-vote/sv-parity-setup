@@ -15,6 +15,17 @@ fi
 
 options=("mainnet" "kovan" "classic" "ropsten")
 
+
+contains() {
+        typeset _x;
+        typeset -n _A="$1"
+        for _x in "${_A[@]}" ; do
+                [ "$_x" = "$2" ] && return 0
+        done
+        return 1
+}
+
+
 if [[ -z "$NETWORK" ]]; then
 	echo "Choose network:"
 	select NETWORK in "${options[@]}"
@@ -29,16 +40,12 @@ if [[ -z "$NETWORK" ]]; then
 		esac
 	done
 else
-	case "$NETWORK" in
-		${options})
-			# all g
-			break
-			;;
-		*)
-			echo "Network named '$NETWORK' is unknown. Exiting..."
-			exit 1
-			;;
-	esac
+	if contains options "$NETWORK" ; then
+		echo "Setting up node on $NETWORK"
+	else
+		echo "Network named $NETWORK is unknown. Exiting..."
+		exit 1
+	fi
 fi
 
 
