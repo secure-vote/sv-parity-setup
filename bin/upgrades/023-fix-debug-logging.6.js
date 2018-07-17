@@ -9,7 +9,7 @@ require('./upgradeLib')("FILENAME", function(){
     execCmd('sudo systemctl restart parity', true)
 
     // make sure we move the syslog b/c it's probs like 2.5GB
-    execCmd('sudo mv /var/log/syslog /mnt/eth/syslog.backup.4')
+    execCmd('sudo mv /var/log/syslog /mnt/eth/syslog.backup.6')
     execCmd('sudo systemctl restart syslog')
 
 });

@@ -9,7 +9,7 @@ After=network.target
 # picks up users default config.toml in $HOME/.local/share/io.parity.ethereum/
 User=ubuntu
 Group=ubuntu
-ExecStart=/bin/bash -c "/usr/bin/parity -l debug --log-file=/mnt/eth/debug.log | grep -v DEBUG"
+ExecStart=/bin/bash -c "/usr/bin/parity -l debug --log-file=/mnt/eth/debug.log 2>&1 | grep -v DEBUG 1>&2"
 Restart=on-failure
 
 # Specifies which signal to use when killing a service. Defaults to SIGTERM.
