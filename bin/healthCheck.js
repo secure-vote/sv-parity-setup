@@ -51,6 +51,8 @@ const updateStatus = () => {
       status.body = `Got an error: ${JSON.stringify(err)}`
       status.lastTs = (new Date()).getTime()
 
+      console.log(`Status: \n${JSON.stringify(status, null, 2)}`);
+
       // if last good ts is not default and current time is more than 10m ahead of last good time
       if ((status.lastTs >= (status.lastGoodTs + 10*60*1000)) || status.lastBlockTs < (status.lastTs - 10*60*1000)) {
         console.warn("WARNING: Health checker restarting parity")
