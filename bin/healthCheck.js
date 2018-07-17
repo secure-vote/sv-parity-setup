@@ -51,10 +51,11 @@ const updateStatus = () => {
       status.lastTs = (new Date()).getTime()
 
       // if last good ts is not default and current time is more than 10m ahead of last good time
-      if (status.lastGoodTs !== TIMESTAMP_FAR_FUTURE && ((status.lastTs|0) >= (status.lastGoodTs|0) + 10*60*1000) || status.lastBlockTs < (status.lastTs - 10*60*1000)) {
+      if ((status.lastTs >= (status.lastGoodTs + 10*60*1000)) || status.lastBlockTs < (status.lastTs - 10*60*1000)) {
         console.warn("WARNING: Health checker restarting parity")
         execCmd("sudo systemctl restart parity")
         status.lastGoodTs = TIMESTAMP_FAR_FUTURE
+        status.lastBlockTs = TIMESTAMP_FAR_FUTURE
       }
     })
 }
