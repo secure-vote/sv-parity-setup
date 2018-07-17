@@ -44,7 +44,8 @@ const updateStatus = () => {
         status.lastBlockN = blockN
       }
 
-      console.log(`Got blockN: ${blockN}, and syncStats:`, syncStatus, 'at', status.lastTs / 1000 | 0);
+      // this just fills up logs
+      // console.log(`Got blockN: ${blockN}, and syncStats:`, syncStatus, 'at', status.lastTs / 1000 | 0);
     }).catch(err => {
       status.code = 503;
       status.body = `Got an error: ${JSON.stringify(err)}`
