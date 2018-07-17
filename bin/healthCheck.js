@@ -8,7 +8,8 @@ TIMESTAMP_FAR_FUTURE = 3000000000000  // in year 2065 some time
 const status = {
   // replaced leading 1 with a 2, so it's like in 2050 or something
   // set this as opening default to prevent restarting a node that's
-  lastGoodTs: TIMESTAMP_FAR_FUTURE
+  lastGoodTs: TIMESTAMP_FAR_FUTURE,
+  lastBlock: TIMESTAMP_FAR_FUTURE
 }
 
 
@@ -34,8 +35,15 @@ const updateStatus = () => {
     p.then(([syncStatus, blockN]) => {
       status.code = syncStatus === false ? 200 : 503;
       status.body = syncStatus === false ? blockN.toString() : syncStatus.currentBlock.toString();
+
       status.lastTs = (new Date()).getTime()
       status.lastGoodTs = (new Date()).getTime()
+
+      if (status.lastBlockN !== blockN) {
+        status.lastBlockTs = status.lastTs
+        status.lastBlockN = blockN
+      }
+
       console.log(`Got blockN: ${blockN}, and syncStats:`, syncStatus, 'at', status.lastTs / 1000 | 0);
     }).catch(err => {
       status.code = 503;
@@ -43,7 +51,7 @@ const updateStatus = () => {
       status.lastTs = (new Date()).getTime()
 
       // if last good ts is not default and current time is more than 10m ahead of last good time
-      if (status.lastGoodTs !== TIMESTAMP_FAR_FUTURE && (status.lastTs|0) >= (status.lastGoodTs|0) + 10*60*1000) {
+      if (status.lastGoodTs !== TIMESTAMP_FAR_FUTURE && ((status.lastTs|0) >= (status.lastGoodTs|0) + 10*60*1000) || status.lastBlockTs < (status.lastTs - 10*60*1000)) {
         console.warn("WARNING: Health checker restarting parity")
         execCmd("sudo systemctl restart parity")
         status.lastGoodTs = TIMESTAMP_FAR_FUTURE
