@@ -5,5 +5,6 @@ require('./upgradeLib')("FILENAME", function(){
     execCmd('sudo systemctl daemon-reload', true)
     execCmd('sudo systemctl stop parity && rm /mnt/eth/debug.log', true)
     execCmd('sudo systemctl start parity', true)
+    execCmd('pm2 restart all')
 
 });
