@@ -13,7 +13,7 @@ else
 fi
 
 
-options=("mainnet" "kovan" "classic" "ropsten")
+options=("mainnet" "kovan" "classic" "ropsten" "stopgap")
 
 
 contains() {
@@ -31,7 +31,7 @@ if [[ -z "$NETWORK" ]]; then
 	select NETWORK in "${options[@]}"
 	do
 		case $NETWORK in
-			"mainnet"|"kovan"|"classic"|"ropsten")
+			"mainnet"|"kovan"|"classic"|"ropsten"|"stopgap")
 				echo "Selected: $NETWORK"
 				break
 				;;

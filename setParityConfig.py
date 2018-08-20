@@ -19,13 +19,16 @@ def load_parity_config(**kwargs):
 if __name__ == "__main__":
     config = load_parity_config()
 
-    identity = "securevote-" + args.name 
+    identity = "securevote-" + args.name
     config['parity']['identity'] = identity
     print('Set parity identity to %s' % identity)
 
-    config['parity']['chain'] = args.net
+    if args.net == "stopgap":
+        config['parity']['chain'] = "~/sv-parity-setup/stopgap-spec.json"
+    else:
+        config['parity']['chain'] = args.net
     print('Set parity network to %s' % args.net)
-    
+
     if args.net == "mainnet":
       config['footprint'] = {
         "cache_size_db": 20000,
@@ -33,7 +36,7 @@ if __name__ == "__main__":
         "cache_size_queue": 6000,
         "cache_size_state": 10000
       }
-    
+
     config['footprint']['pruning'] = "archive"
 
     print("Set parity footprint to: %s" % args.net)

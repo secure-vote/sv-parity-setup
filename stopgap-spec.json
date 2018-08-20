@@ -1,0 +1,68 @@
+{
+    "name": "SecureVote StopGap PoA",
+    "dataDir": "stopgap",
+    "engine": {
+        "authorityRound": {
+            "params": {
+                "stepDuration": "4",
+				"blockReward": "0x4563918244F40000",
+				"validators" : {
+					"multi": {
+                        "0": {
+                            "list": [
+                                "0x53567e1925FeC941d35495A3d48859dB34b460dA",
+                                "0x5356681f3a274f620a0Eb5a9E93175690BE621A8",
+                                "0x5356844Ee19b6835be1b13801d2c2fb2852426EA",
+                                "0x53563949fA691e504475289049d69521Ee72818F"
+                            ]
+                        }
+                    }
+				},
+				"maximumUncleCountTransition": 0,
+				"maximumUncleCount": 0
+            }
+        }
+    },
+    "genesis": {
+        "seal": {
+            "authorityRound": {
+				"step": "0x0",
+				"signature": "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+			}
+        },
+        "difficulty": "0x20000",
+        "gasLimit": "0x7b0000",
+        "timestamp": 1534384543,
+        "extraData": "0x536563757265566f74652053746f7047617020506f41204e6574776f726b2020"
+    },
+    "params": {
+		"networkID" : "0xf0",
+        "maximumExtraDataSize": "0x20",
+        "minGasLimit": "0x3fffff",
+		"gasLimitBoundDivisor": "0x400",
+		"registrar" : "0xfAb104398BBefbd47752E7702D9fE23047E1Bca3",
+		"maxCodeSize": 65536,
+		"maxCodeSizeTransition": 0,
+		"validateChainIdTransition": 0,
+		"validateReceiptsTransition" : 0,
+		"eip140Transition": 0,
+		"eip211Transition": 0,
+		"eip214Transition": 0,
+		"eip658Transition": 0,
+		"wasmActivationTransition": 0
+    },
+    "accounts": {
+        "0000000000000000000000000000000000000001": { "builtin": { "balance": "1", "name": "ecrecover", "pricing": { "linear": { "base": 3000, "word": 0 } } } },
+        "0000000000000000000000000000000000000002": { "builtin": { "balance": "1", "name": "sha256", "pricing": { "linear": { "base": 60, "word": 12 } } } },
+        "0000000000000000000000000000000000000003": { "builtin": { "balance": "1", "name": "ripemd160", "pricing": { "linear": { "base": 600, "word": 120 } } } },
+        "0000000000000000000000000000000000000004": { "builtin": { "balance": "1", "name": "identity", "pricing": { "linear": { "base": 15, "word": 3 } } } },
+        "0000000000000000000000000000000000000005": { "builtin": { "name": "modexp", "pricing": { "modexp": { "divisor": 20 } } } },
+        "0000000000000000000000000000000000000006": { "builtin": { "name": "alt_bn128_add", "pricing": { "linear": { "base": 500, "word": 0 } } } },
+        "0000000000000000000000000000000000000007": { "builtin": { "name": "alt_bn128_mul", "pricing": { "linear": { "base": 40000, "word": 0 } } } },
+        "0000000000000000000000000000000000000008": { "builtin": { "name": "alt_bn128_pairing", "pricing": { "alt_bn128_pairing": { "base": 100000, "pair": 80000 } } } },
+        "c45797d1A7acCc9FB2DcB054Aa907f303A0a08f8": { "balance": "1606938044258990275541962092341162602522202993782792835301376" }
+    },
+	"nodes": [
+        "enode://304c9dbcca45409785539b227f273c3329197c86de6cc8d73252870f91176eb3588db2774fc7db4a6011519faa5fa4f39d63aeb341db672901ebdf3555fda095@13.238.183.223:30303"
+	]
+}
