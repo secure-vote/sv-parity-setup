@@ -96,8 +96,9 @@ pip3 install requests toml
 python3 getParity.py
 
 # install parity + cleanup
-sudo dpkg -i ~/parity.deb
-rm -f ~/parity.deb
+sudo mv ~/parity.bin /usr/bin/parity
+sudo chown root:root /usr/bin/parity
+sudo chmod 555 /usr/bin/parity
 
 
 # get some swap up in here
@@ -113,10 +114,12 @@ add_line_to_file '/swapfile none swap sw 0 0' '/etc/fstab'
 # setup parity directories + nvme
 mkdir -p ~/.local/share
 sudo mkdir -p /mnt/eth
-add_line_to_file "/dev/nvme0n1 /mnt/eth ext4 defaults,discard 0 0" "/etc/fstab"
-sudo mkfs.ext4 /dev/nvme0n1 || true
-sudo tune2fs -m 2 /dev/nvme0n1 || true
-sudo mount -a
+if [ -f /dev/nvme0n1 ]; then
+	add_line_to_file "/dev/nvme0n1 /mnt/eth ext4 defaults,discard 0 0" "/etc/fstab"
+	sudo mkfs.ext4 /dev/nvme0n1 || true
+	sudo tune2fs -m 2 /dev/nvme0n1 || true
+	sudo mount -a
+fi
 sudo chown -R ubuntu:ubuntu /mnt/eth
 ln -s /mnt/eth ~/.local/share/io.parity.ethereum || true
 

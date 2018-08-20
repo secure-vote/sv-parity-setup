@@ -5,13 +5,13 @@ import os
 import hashlib
 
 def get_parity_release():
-  r = requests.get("https://api.github.com/repos/paritytech/parity/releases/latest")
+  r = requests.get("https://api.github.com/repos/paritytech/parity-ethereum/releases/latest")
   b = r.json()
   lines = b['body'].split('\r\n')
-  pkg_line = [l for l in lines if "ubuntu_amd64.deb" in l][0]
-  p1 = pkg_line.split(".deb](")[1]
-  (url, p2) = p1.split(") | <sup>`")
-  checksum = p2.split("`</sup>")[0]
+  pkg_line = [l for l in lines if "x86_64-unknown-linux-gnu" in l][0]
+  p1 = pkg_line.split("[parity](")[1]
+  (url, p2) = p1.split(") | `")
+  checksum = p2.split("`")[0]
   return (url.replace("http:", "https:"), checksum)
 
 
@@ -25,11 +25,11 @@ def download_parity(url, checksum):
   assert checksum == got_checksum
   print("Sha256 checksum verified")
 
-  with open(os.path.expanduser("~/parity.deb"), "wb") as f: 
+  with open(os.path.expanduser("~/parity.bin"), "wb") as f:
     f.write(bin)
-  print("Saved latest parity release to ~/parity.deb")
+  print("Saved latest parity release to ~/parity.bin")
 
 
-if __name__ == "__main__": 
+if __name__ == "__main__":
   (url, checksum) = get_parity_release()
   download_parity(url, checksum)
