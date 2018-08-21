@@ -12,7 +12,7 @@ fi
 
 cd ~/sv-parity-setup
 ## set us back a bit so the pull is likely to always succeed without issue
-git reset --hard HEAD~3
+git reset --hard "HEAD~3"
 git pull
 ./installBin.sh
 cd ~
