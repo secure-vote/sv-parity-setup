@@ -2,7 +2,7 @@
 
 . ~/.nvm/nvm.sh
 
-set -x
+set -e
 
 read -p "POA Validator Address > " ADDR
 read -s -p "POA Validator Secret Key > " SECRET_KEY
