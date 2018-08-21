@@ -4,6 +4,55 @@ set -x -e
 NODE_NAME="$1"
 NETWORK="$2"
 
+
+# this prevents pip3 complaining
+export LC_ALL=C
+
+
+confirm() {
+    # call with a prompt string or use a default
+    read -r -p "${1:-Are you sure? [y/N]} " response
+    case "$response" in
+        [yY][eE][sS]|[yY])
+            true
+            ;;
+        *)
+            false
+            ;;
+    esac
+}
+
+function add_line_to_file {
+	if [ $# -ne 2 ]; then
+		echo "ERROR; WRONG NUMBER OF ARGS add_line_to_file"
+		false
+	else
+		grep -qF "$1" "$2" || echo "$1" | sudo tee -a "$2"
+	fi
+}
+
+contains() {
+        typeset _x;
+        typeset -n _A="$1"
+        for _x in "${_A[@]}" ; do
+                [ "$_x" = "$2" ] && return 0
+        done
+        return 1
+}
+
+function setup_storage {
+	echo "Partitioning $1"
+	add_line_to_file "$1 /mnt/eth ext4 defaults,discard 0 0" "/etc/fstab"
+	sudo mkfs.ext4 "$1" || true
+	sudo tune2fs -m 2 "$1" || true
+	sudo mount -a
+	echo "Finished partitioning $1"
+}
+
+
+
+
+
 if [[ -z "$NODE_NAME" ]]; then
 	# grab dat dere node name
 	echo "Please enter a name for this node! (e.g. eth-aws-nv-node-05)" && \
@@ -14,16 +63,6 @@ fi
 
 
 options=("mainnet" "kovan" "classic" "ropsten" "stopgap")
-
-
-contains() {
-        typeset _x;
-        typeset -n _A="$1"
-        for _x in "${_A[@]}" ; do
-                [ "$_x" = "$2" ] && return 0
-        done
-        return 1
-}
 
 
 if [[ -z "$NETWORK" ]]; then
@@ -56,18 +95,37 @@ echo "export NODE_NAME=$NODE_NAME" >> ~/.bashrc
 export ETH_NETWORK=$NETWORK
 export NODE_NAME=$NODE_NAME
 
-# this prevents pip3 complaining
-export LC_ALL=C
 
 
-function add_line_to_file {
-	if [ $# -ne 2 ]; then
-		echo "ERROR; WRONG NUMBER OF ARGS add_line_to_file"
-		false
+# setup parity directories + nvme
+mkdir -p ~/.local/share
+sudo mkdir -p /mnt/eth
+
+if [ confirm "Would you like to partition extra disk? [y/N]" ]; then
+	if [ -f /dev/nvme0n1 ]; then
+		drive="/dev/nvme0n1"
+	elif [ -f /dev/xvdb ]; then
+		drive="/dev/xvdb"
 	else
-		grep -qF "$1" "$2" || echo "$1" | sudo tee -a "$2"
+		echo "No extra disk found. Not partitioning."
+		drive=false
 	fi
-}
+
+	if [ "$drive" != "false" && confirm "Okay to partition $drive [y/N]" ]; then
+		setup_storage "$drive"
+	else
+		echo "Not partitioning $drive"
+	fi
+fi
+
+sudo chown -R ubuntu:ubuntu /mnt/eth
+ln -s /mnt/eth ~/.local/share/io.parity.ethereum || true
+
+echo "Please enter total RAM in MB" && \
+read -p "> " TOTAL_RAM
+echo "Configuring for $TOTAL_RAM MB of RAM"
+
+
 
 
 # hold grub version so we don't get prompted for user input
@@ -111,19 +169,13 @@ sudo sysctl vm.swappiness=10 || true
 add_line_to_file 'vm.swappiness=10' '/etc/sysctl.conf'
 add_line_to_file '/swapfile none swap sw 0 0' '/etc/fstab'
 
-# setup parity directories + nvme
-mkdir -p ~/.local/share
-sudo mkdir -p /mnt/eth
-if [ -f /dev/nvme0n1 ]; then
-	add_line_to_file "/dev/nvme0n1 /mnt/eth ext4 defaults,discard 0 0" "/etc/fstab"
-	sudo mkfs.ext4 /dev/nvme0n1 || true
-	sudo tune2fs -m 2 /dev/nvme0n1 || true
-	sudo mount -a
-fi
-sudo chown -R ubuntu:ubuntu /mnt/eth
-ln -s /mnt/eth ~/.local/share/io.parity.ethereum || true
 
-python3 setParityConfig.py --name "$NODE_NAME" --net "$NETWORK"
+pruning=""
+if [ "$ARCHIVE" == "true" ]; then
+	pruning="--archive"
+fi
+
+python3 setParityConfig.py --name "$NODE_NAME" --net "$NETWORK" --ram "$TOTAL_RAM" "$pruning"
 
 
 # set hostname stuff for server
