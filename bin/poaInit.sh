@@ -24,7 +24,7 @@ node ~/bin/_poaStep1.js
 sudo systemctl start parity
 sleep 10s
 
-curl --data "{\"jsonrpc\":\"2.0\",\"method\":\"parity_newAccountFromSecret\",\"params\":[\"0x$SECRET_KEY\", \"$PASSWORD\"],\"id\":0}" -H "Content-Type: application/json" -X POST 127.0.0.1:8545
+curl --data "{\"jsonrpc\":\"2.0\",\"method\":\"parity_newAccountFromSecret\",\"params\":[\"0x$SECRET_KEY\", \"$PASSWORD\"],\"id\":0}" -H "Content-Type: application/json" -X POST 127.0.0.1:38545
 
 sudo systemctl stop parity
 sleep 5s

@@ -21,6 +21,7 @@ conf.mining = conf.mining || {}
 conf.mining.engine_signer = address
 conf.mining.reseal_on_txs = "none"
 conf.mining.usd_per_tx = "0"
+conf.mining.force_sealing = true
 
 conf.account = conf.account || {}
 conf.account.unlock = [address]
@@ -29,7 +30,6 @@ conf.account.password = [ "/mnt/eth/password.txt" ]
 conf.rpc = conf.rpc || {}
 conf.rpc.apis = ["all"]
 conf.rpc.interface = "local"
-conf.rpc.port = 8545
 
 conf.footprint = conf.footprint || {}
 conf.footprint.pruning = "fast"

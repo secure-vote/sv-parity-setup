@@ -16,7 +16,6 @@ conf.secretstore.disable = false
 conf.rpc = conf.rpc || {}
 conf.rpc.apis = ["all"]
 conf.rpc.interface = "local"
-conf.rpc.port = 8545
 
 conf.footprint = conf.footprint || {}
 conf.footprint.pruning = "fast"
