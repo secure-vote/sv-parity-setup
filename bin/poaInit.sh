@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ~/.nvm/nvm.sh
+source ~/bin/_loadCommon.sh
 
 set -e
 
