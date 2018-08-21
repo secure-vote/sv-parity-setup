@@ -24,7 +24,7 @@ conf.mining.usd_per_tx = "0"
 
 conf.account = conf.account || {}
 conf.account.unlock = [address]
-conf.account.password = "/mnt/eth/password.txt"
+conf.account.password = [ "/mnt/eth/password.txt" ]
 
 conf.rpc = conf.rpc || {}
 conf.rpc.apis = ["all"]
