@@ -8,3 +8,5 @@ echo "Configuring for IP $EXTIP"
 
 cd ~/bin/
 node _setNatExtIP.js "$EXTIP"
+
+sudo systemctl restart parity
