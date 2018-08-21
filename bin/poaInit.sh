@@ -2,6 +2,8 @@
 
 . ~/.nvm/nvm.sh
 
+set -x
+
 read -p "POA Validator Address > " ADDR
 read -s -p "POA Validator Secret Key > " SECRET_KEY
 
@@ -13,6 +15,8 @@ export SECRET_KEY
 < /dev/urandom LC_CTYPE=C tr -c -d _A-Z-a-z-0-9 | head -c20 > /mnt/eth/password.txt
 PASSWORD="$(cat /mnt/eth/password.txt)"
 echo "Created password"
+
+npm i -g toml-js
 
 sudo systemctl stop parity
 sleep 5s
