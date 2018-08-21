@@ -5,7 +5,7 @@ wget https://github.com/secure-vote/sv-parity-setup/archive/master.tar.gz && \
 tar zxvf master.tar.gz && \
 rm master.tar.gz && \
 cd sv-parity-setup-master && \
-bash setup.sh | tee setup.log
+bash setup.sh | tee -a ~/setup.log
 ```
 
 Note: `setup.sh` optionally takes two arguments:

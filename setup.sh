@@ -1,6 +1,8 @@
 #!/bin/bash
 set -x -e
 
+echo -e "\n\nSTARTING SETUP AT $(date +%s)\n\n"
+
 NODE_NAME="$1"
 NETWORK="$2"
 
@@ -14,10 +16,10 @@ confirm() {
     read -r -p "${1:-Are you sure? [y/N]} " response
     case "$response" in
         [yY][eE][sS]|[yY])
-            true
+            return 0  # good return
             ;;
         *)
-            false
+            return 1  # bad return
             ;;
     esac
 }
@@ -101,20 +103,20 @@ export NODE_NAME=$NODE_NAME
 mkdir -p ~/.local/share
 sudo mkdir -p /mnt/eth
 
-if [ confirm "Would you like to partition extra disk? [y/N]" ]; then
-	if [ -f /dev/nvme0n1 ]; then
+if confirm "Would you like to partition extra disk? [y/N]" ; then
+	drive=false
+	if [ -e /dev/nvme0n1 ]; then
 		drive="/dev/nvme0n1"
-	elif [ -f /dev/xvdb ]; then
+	elif [ -e /dev/xvdb ]; then
 		drive="/dev/xvdb"
 	else
 		echo "No extra disk found. Not partitioning."
-		drive=false
 	fi
 
-	if [ "$drive" != "false" && confirm "Okay to partition $drive [y/N]" ]; then
+	if test "$drive" != "false" && confirm "Okay to partition $drive [y/N]" ; then
 		setup_storage "$drive"
 	else
-		echo "Not partitioning $drive"
+		echo "Not doing any partitioning."
 	fi
 fi
 
@@ -126,6 +128,11 @@ read -p "> " TOTAL_RAM
 echo "Configuring for $TOTAL_RAM MB of RAM"
 
 
+pruning=""
+confirm "Should this node be a full archive node? [y/N]" && echo "Node being configured as full archive" && pruning="--archive" || echo "Node will not be a full archive node."
+
+
+echo "I'll now set up the node with the given details." && confirm "Continue? [y/N]" || ( echo "exiting" && exit 1 )
 
 
 # hold grub version so we don't get prompted for user input
@@ -170,12 +177,7 @@ add_line_to_file 'vm.swappiness=10' '/etc/sysctl.conf'
 add_line_to_file '/swapfile none swap sw 0 0' '/etc/fstab'
 
 
-pruning=""
-if [ "$ARCHIVE" == "true" ]; then
-	pruning="--archive"
-fi
-
-python3 setParityConfig.py --name "$NODE_NAME" --net "$NETWORK" --ram "$TOTAL_RAM" "$pruning"
+python3 setParityConfig.py --name "$NODE_NAME" --net "$NETWORK" --ram "$TOTAL_RAM" $pruning
 
 
 # set hostname stuff for server
