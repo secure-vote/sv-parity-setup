@@ -1,6 +1,6 @@
 {
-    "name": "SecureVote StopGap PoA",
-    "dataDir": "stopgap",
+    "name": "SecureVote PoA Network",
+    "dataDir": "sv-poa-net",
     "engine": {
         "authorityRound": {
             "params": {

@@ -26,7 +26,7 @@ if __name__ == "__main__":
     print('Set parity identity to %s' % identity)
 
     if args.net == "stopgap":
-        config['parity']['chain'] = "/home/ubuntu/sv-parity-setup/stopgap-spec.json"
+        config['parity']['chain'] = "/home/ubuntu/sv-parity-setup/sv-poa-spec.json"
     else:
         config['parity']['chain'] = args.net
     print('Set parity network to %s' % args.net)
