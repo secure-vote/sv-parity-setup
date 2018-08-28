@@ -1,4 +1,4 @@
-# One Liner Parity Setup for AWS i3 nodes
+# One Liner Parity Setup for AWS nodes
 
 ```
 wget https://github.com/secure-vote/sv-parity-setup/archive/master.tar.gz && \
@@ -8,15 +8,7 @@ cd sv-parity-setup-master && \
 bash setup.sh | tee -a ~/setup.log
 ```
 
-Note: `setup.sh` optionally takes two arguments:
-
-`bash setup.sh "<node-name>" "<network>"`
-
-If these are supplied zero user interaction should be necessary.
-
 ## Notes
-
-**This is specific to i3 nodes - look in for disk setup / partitioning / swap / etc**
 
 This expects you to be using ubuntu 16.04 (probs works on other Ubuntu distros too)
 
@@ -36,3 +28,5 @@ You should probs just skim the setup.sh script - it's pretty straight forward
 Sets up the latest parity release - pulls github release data and parses for the ubuntu deb url - also verifies checksum (but doesn't verify a signature)
 
 The idea is you use an ELB or something in front of the node to add HTTPS and expose on port 8545 or whichever port you want.
+
+partitioning and things should be done automatically (see setup.sh and setParityConfig.py for ram stuff)
