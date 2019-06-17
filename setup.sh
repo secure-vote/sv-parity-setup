@@ -136,7 +136,7 @@ echo "I'll now set up the node with the given details." && confirm "Continue? [y
 
 
 # hold grub version so we don't get prompted for user input
-sudo apt-mark hold grub
+sudo apt-mark hold grub || sudo apt-mark hold grub2-common
 
 
 # general ubuntu stuff + packages
@@ -159,7 +159,7 @@ npm install -g web3@1.0.0-beta.31 toml-js
 
 # python requirements + download parity
 pip3 install requests toml
-python3 getParity.py
+python3 getParity.py || echo "WARNING: INSTALL PARITY MANUALLY"
 
 # install parity + cleanup
 sudo mv ~/parity.bin /usr/bin/parity
@@ -168,10 +168,10 @@ sudo chmod 555 /usr/bin/parity
 
 
 # get some swap up in here
-sudo fallocate -l 2G /swapfile || true
-sudo chmod 600 /swapfile
-sudo mkswap /swapfile || true
-sudo swapon /swapfile || true
+sudo fallocate -l ${TOTAL_RAM}M /mnt/eth/swapfile || true
+sudo chmod 600 /mnt/eth/swapfile
+sudo mkswap /mnt/eth/swapfile || true
+sudo swapon /mnt/eth/swapfile || true
 sudo sysctl vm.swappiness=10 || true
 
 add_line_to_file 'vm.swappiness=10' '/etc/sysctl.conf'
